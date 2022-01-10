@@ -3,6 +3,7 @@ name: ci
 on:
   push:
     branches: "*"
+    tags: "*"
 
 env:
   go-version: 1.17
@@ -38,17 +39,17 @@ jobs:
       - name: build and package
         run: bash ./package_release.sh
 
-      - name: Set output
-        id: vars
+      - name: set release vars
+        id: release-vars
         run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ steps.vars.outputs.short_ref }}
+          automatic_release_tag: ${{ steps.release-vars.outputs.short_ref }}
           prerelease: true
-          title: ${{ steps.vars.outputs.short_ref }}
+          title: ${{ steps.release-vars.outputs.short_ref }}
           files: |
-            LICENSE.txt
+            LICENSE
             ./artifacts/*.zip
             ./artifacts/*.tar.gz
