@@ -1,8 +1,9 @@
-name: ci
+name: "tagged-release"
 
 on:
   push:
-    branches: "*"
+    tags:
+      - "v*"
 
 env:
   go-version: 1.17
@@ -38,16 +39,21 @@ jobs:
       - name: build and package
         run: bash ./package_release.sh
 
-      - name: set release vars
-        id: release-vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+      - uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            LICENSE
+            ./artifacts/*.zip
+            ./artifacts/*.tar.gz
 
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ steps.release-vars.outputs.short_ref }}
-          prerelease: true
-          title: ${{ steps.release-vars.outputs.short_ref }}
+          prerelease: false
+          automatic_release_tag: latest
+          title: latest
           files: |
             LICENSE
             ./artifacts/*.zip

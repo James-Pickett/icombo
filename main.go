@@ -1,7 +1,3 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
-*/
 package main
 
 import (
@@ -36,7 +32,7 @@ func initConfig() {
 
 		// if not try to move to example folder used during dev
 		if _, err := os.Stat(fmt.Sprint("./example/", defaultConfigFilePath)); os.IsNotExist(err) {
-			log.Panicln("no config file found")
+			log.Fatalln("no config file found")
 		}
 		log.Print("config file found a ./example/", defaultConfigFilePath, " executing from ./example")
 		os.Chdir("./example")
