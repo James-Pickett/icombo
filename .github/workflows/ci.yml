@@ -1,4 +1,4 @@
-name: test
+name: ci
 
 on:
   push:
@@ -41,9 +41,9 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${GITHUB_REF##*/}"
+          automatic_release_tag: "${{ GITHUB_REF##*/ }}"
           prerelease: true
-          title: "${GITHUB_REF##*/}"
+          title: "${{ GITHUB_REF##*/ }}"
           files: |
             LICENSE.txt
             ./artifacts/*.zip
