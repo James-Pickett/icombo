@@ -2,7 +2,7 @@
 
 set -e
 
-git_branch=$(git rev-parse --abbrev-ref HEAD)
+git_branch=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)
 oses=(
     "linux" 
     "windows" 
