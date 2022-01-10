@@ -1,0 +1,47 @@
+image_input_directory = "./image_parts"
+image_output_directory = "./output_images"
+image_part_size_pixels = 64
+concurrency = 0
+
+[[images]]
+name = "log_to_boards"
+
+  [[images.image_parts]]
+  file_name = "log"
+  count = 2
+
+  # arrow faces up by default and rotates counter clockwise
+  [[images.image_parts]]
+  file_name = "arrow"
+  rotation_degrees = 270
+
+  [[images.image_parts]]
+  file_name = "board"
+
+[[images]]
+name = "boards_to_house"
+
+  [[images.image_parts]]
+  file_name = "board"
+  count = 2
+
+  [[images.image_parts]]
+  file_name = "arrow"
+  rotation_degrees = 270
+
+  [[images.image_parts]]
+  file_name = "house"
+
+[[images]]
+name = "houses_to_village"
+
+  [[images.image_parts]]
+  file_name = "house"
+  count = 2
+
+  [[images.image_parts]]
+  file_name = "arrow"
+  rotation_degrees = 270
+
+  [[images.image_parts]]
+  file_name = "village"
