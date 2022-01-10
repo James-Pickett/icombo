@@ -1,9 +1,9 @@
-name: tagged-release
+name: beta-release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
 
 env:
   go-version: 1.17
@@ -42,18 +42,9 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            LICENSE
-            ./artifacts/*.zip
-            ./artifacts/*.tar.gz
-
-      - uses: "marvinpinto/action-automatic-releases@v1.2.1"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          automatic_release_tag: latest
-          title: latest
+          prerelease: true
+          automatic_release_tag: beta
+          title: beta
           files: |
             LICENSE
             ./artifacts/*.zip
