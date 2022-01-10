@@ -17,7 +17,7 @@ Now my workflow looks like this:
 * add a few lines to my [icombo.toml](./example/icombo.toml) file
     ```
     [[images]]
-    name = "log_to_boards"
+    name = "logs_to_boards"
 
         [[images.image_parts]]
         file_name = "log"
@@ -31,9 +31,12 @@ Now my workflow looks like this:
         [[images.image_parts]]
         file_name = "board"
     ```
-* run icombo to produce
+* run icombo to produce logs_to_boards.png
 
-    <img src="./example/output_images/log_to_boards.png" width="250">
+    <img src="./example/output_images/logs_to_boards.png" width="200">
+
+### Why TOML?
+While my personal preference would by yml, I think toml is easer for non coder types
 
 ## Limitations
 * only handles .png files
@@ -46,6 +49,10 @@ Now my workflow looks like this:
 * address limitations above
 * instead of reading each image part from disk everytime, store them in memory
   - this may or may not be helpful, need to test, possibly trading memory for speed
-* add flags for config file path, not it must be at `./icombo.toml`
+* add flags for config file path, now it must be at `./icombo.toml`
+* add functionality for handling other config formats (yml, json, etc)
 
-
+## Credits
+* [game-icons.net](https://game-icons.net/) for the art
+* @ozonru for the [imaging package](https://github.com/disintegration/imaging) that made the image manipulation super easy
+* @spf13 for the [viper package's](https://github.com/spf13/viper) awesome config tooling

@@ -62,7 +62,7 @@ func ProcessImages(input ProcessImagesInput) error {
 	errorChan := make(chan error, imageCount)
 
 	concurrency := viper.GetInt("concurrency")
-	if concurrency <= 0 {
+	if concurrency <= 0 || concurrency > imageCount {
 		concurrency = imageCount
 	}
 

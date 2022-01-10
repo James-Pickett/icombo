@@ -4,7 +4,7 @@ image_part_size_pixels = 64
 concurrency = 0
 
 [[images]]
-name = "log_to_boards"
+name = "logs_to_boards"
 
   [[images.image_parts]]
   file_name = "log"
