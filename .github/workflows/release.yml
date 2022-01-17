@@ -1,4 +1,4 @@
-name: build-test-tag
+name: release
 
 on:
   push:
@@ -43,6 +43,7 @@ jobs:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
         title: ${{ steps.bump.outputs.new_tag }}
+        automatic_release_tag: ${{ steps.bump.outputs.new_tag }}
         files: |
           LICENSE
           ./artifacts/*.zip
