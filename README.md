@@ -102,4 +102,4 @@ While my personal preference would by yml, I think toml is easer for non coder t
 * @ozonru for the [imaging package](https://github.com/disintegration/imaging) that made the image manipulation super easy
 * @spf13 for the [viper package's](https://github.com/spf13/viper) awesome config tooling
 
-.
+..
