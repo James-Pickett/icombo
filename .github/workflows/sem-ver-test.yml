@@ -3,7 +3,7 @@ name: sem-ver-test
 on:
   pull_request:
     branches:
-    - sem-ver-test
+    - auto-sem-ver
     types:
     - closed
 
