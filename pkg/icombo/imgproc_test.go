@@ -4,11 +4,19 @@ import (
 	"log"
 	"os"
 	"testing"
-
-	"github.com/spf13/viper"
 )
 
+const TEST_IMAGE_OUTPUT_DIR = "./test_image_output"
+const TEST_IMAGE_INPUT_DIR = "../../example/image_parts"
+const TEST_IMAGE_PART_PIXEL_SIZE = 32
+
 var testConfig = ProcessImagesInput{
+	Options: ProcessImagesOptions{
+		Concurrency:          0,
+		ImageOutputDirectory: TEST_IMAGE_OUTPUT_DIR,
+		ImageInputDirectory:  TEST_IMAGE_INPUT_DIR,
+		ImagePartSizePixels:  TEST_IMAGE_PART_PIXEL_SIZE,
+	},
 	ImageDefs: []ImageDef{
 		{
 			Name: "boards_to_logs",
@@ -48,17 +56,10 @@ var testConfig = ProcessImagesInput{
 
 func setupProcessImagesSuccess(tb testing.TB) func(tb testing.TB) {
 	log.Println("setup suite")
-
-	testOutputDirectory := "./test_image_output"
-
-	viper.Set("image_output_directory", testOutputDirectory)
-	viper.Set("image_part_size_pixels", 32)
-	viper.Set("image_input_directory", "../../example/image_parts")
-
 	// Return a function to teardown the test
 	return func(tb testing.TB) {
 		log.Println("teardown suite")
-		os.RemoveAll(testOutputDirectory)
+		os.RemoveAll(TEST_IMAGE_OUTPUT_DIR)
 	}
 }
 
