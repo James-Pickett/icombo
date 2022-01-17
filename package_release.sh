@@ -40,13 +40,14 @@ generate_release_artifacts(){
     GOOS=$os GOARCH=$arch go build -o "${binDirPath}/${binName}"
 
     # package binary
-    if [ "$os" == "windows" ]
-    then
-        zip -rjD "${artifactDir}/${binDirName}.zip" "${binDirPath}/"
-    else
-        tarPath="${artifactDir}/${binDirName}.tar.gz"
-        tar -C "${binDirPath}" -czvf "${tarPath}" "${binName}"
-    fi
+    
+    # create zip
+    zip -rjD "${artifactDir}/${binDirName}.zip" "${binDirPath}/"
+
+    # create tar
+    tarPath="${artifactDir}/${binDirName}.tar.gz"
+    tar -C "${binDirPath}" -czvf "${tarPath}" "${binName}"
+
 
     echo ""
     echo "building example package for ${binDirName}"
@@ -58,13 +59,13 @@ generate_release_artifacts(){
     rm -rf "${binDirPath}/output_images"
 
     # package example project
-    if [ "$os" == "windows" ]
-    then
-        (cd "${binDirPath}" && zip -r "../../artifacts/${binDirName}_example_project.zip" .)
-    else
-        tarPath="${artifactDir}/${binDirName}_example_project.tar.gz"
-        tar -C "${binDirPath}" -czvf "${tarPath}" "."
-    fi
+
+    # create zip
+    (cd "${binDirPath}" && zip -r "../../artifacts/${binDirName}_example_project.zip" .)
+
+    # create tar
+    tarPath="${artifactDir}/${binDirName}_example_project.tar.gz"
+    tar -C "${binDirPath}" -czvf "${tarPath}" "."
 
     rm -rf "${binDirPath}"
 
@@ -79,6 +80,8 @@ do
         then
             continue
         fi
-        generate_release_artifacts $os $arch
+        generate_release_artifacts $os $arch &
     done
+
+    wait
 done
