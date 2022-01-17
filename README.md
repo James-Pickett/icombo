@@ -52,32 +52,44 @@ While my personal preference would by yml, I think toml is easer for non coder t
     ```toml
     [[images]]
     # this image will be output to the image_output_directory as my_new_image.png
-    name = "my_new_image"
+    name = "logs_to_boards"
 
         # image parts are read from top to bottom bulding the image from left to right
         [[images.image_parts]]
+
         # icombo will serach for log.png in the configured image_input_directory
-        file_name = "first_part"
+        file_name = "log"
+
         # icombo will repeat the image based on count, if count is 1 you can remove this line
         count = 2
+
+        # arrow faces up by default and rotates counter clockwise
+        [[images.image_parts]]
+
+        file_name = "arrow"
+        
         # icombo will rotate the image based on rotation_degrees counter clockwise
-        rotation_degrees = 180
+        rotation_degrees = 270
 
         # simplest way to define a part, will add it once not changing rotation
         [[images.image_parts]]
-        file_name = "second_part"
+        file_name = "board"
     ```
 * save your file and run icombo then check your image_output_directory
 * you can also define the following configurations in the icombo.toml file
     ```toml
+    [options]
     # where icombo will look for the parts to build images
     image_input_directory = "./image_parts"
+
     # where icombo will output images
     image_output_directory = "./output_images"
+
     # the pixel size of a side of an image part
     # this configuration will make each image part a square whose sides are 64 pixels
     # if my image had 4 parts, the height would be 64 pixels and the width 256 pixels (4 * 64)
     image_part_size_pixels = 64
+
     # number of images that can be built simultaneously, if left at zero icombo will attempt to build all images simultaneously 
     concurrency = 0
     ```
