@@ -40,7 +40,7 @@ While my personal preference would by yml, I think toml is easer for non coder t
 
 ### Setup
 
-* Head over the the [release page](https://github.com/James-Pickett/icombo/releases/tag/latest)
+* Head over the the [release page](https://github.com/James-Pickett/icombo/releases/latest)
 * Download the artifact suffixed with `example_project` for your OS
 * Extract the compressed file and run icombo
 * Just the binaries are also available if you don't want an example project

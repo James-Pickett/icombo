@@ -1,0 +1,37 @@
+name: build-test-tag
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  go-version: 1.17
+
+jobs:
+  build_test_tag:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ env.go-version }}
+
+    - name: Build
+      run: go build -v ./...
+
+    - name: Test
+      run: sudo go test -v -cover ./...
+
+    - id: bump
+      uses: zwaldowski/match-label-action@v1
+      with:
+        allowed: major,minor,patch
+
+    - uses: zwaldowski/semver-release-action@v1
+      with:
+        bump: ${{ steps.bump.outputs.match }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+    
