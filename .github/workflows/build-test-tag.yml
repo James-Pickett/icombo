@@ -24,14 +24,9 @@ jobs:
 
     - name: Test
       run: sudo go test -v -cover ./...
-
-    - id: bump
-      uses: zwaldowski/match-label-action@v1
-      with:
-        allowed: major,minor,patch
-
-    - uses: zwaldowski/semver-release-action@v1
-      with:
-        bump: ${{ steps.bump.outputs.match }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
     
+    - name: Bump version and push tag
+      uses: hennejg/github-tag-action@v4.1.jh1
+      with:
+        release_branches: main
+        github_token: ${{ secrets.GITHUB_TOKEN }}
