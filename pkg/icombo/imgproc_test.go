@@ -10,11 +10,6 @@ const TEST_IMAGE_OUTPUT_DIR = "./test_image_output"
 const TEST_IMAGE_INPUT_DIR = "../../example/image_parts"
 const TEST_IMAGE_PART_PIXEL_SIZE = 32
 
-var testOpts = ProcessImagesOptions{
-	Concurrency:          0,
-	ImageOutputDirectory: "./test_image_output",
-}
-
 var testConfig = ProcessImagesInput{
 	Options: ProcessImagesOptions{
 		Concurrency:          0,
