@@ -101,5 +101,3 @@ While my personal preference would by yml, I think toml is easer for non coder t
 * [game-icons.net](https://game-icons.net/) for the art
 * @ozonru for the [imaging package](https://github.com/disintegration/imaging) that made the image manipulation super easy
 * @spf13 for the [viper package's](https://github.com/spf13/viper) awesome config tooling
-
-..
