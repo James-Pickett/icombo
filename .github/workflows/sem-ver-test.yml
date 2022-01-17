@@ -1,0 +1,22 @@
+name: sem-ver-test
+
+on:
+  push:
+    branches:
+      - "auto-sem-ver"
+
+env:
+  go-version: 1.17
+
+jobs:
+  build_test_tag:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - id: bump
+      uses: zwaldowski/match-label-action@v1
+      with:
+        allowed: major, minor, patch
+
+    - run: echo ${{ steps.bump.outputs.match }}
