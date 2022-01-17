@@ -1,0 +1,36 @@
+name: pr-main-checks
+on:
+  pull_request:
+    branches:
+    - main
+    - sem-ver-test
+    types:
+    - opened
+    - labeled
+    - unlabeled
+
+jobs:
+  includes_version_bump:
+    name: Labels include one of 'major', 'minor', or 'patch'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check PR labels
+      uses: zwaldowski/match-label-action@v1
+      with:
+        allowed: major,minor,patch
+
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ env.go-version }}
+
+    - name: Build
+      run: go build -v ./...
+
+    - name: Test
+      run: sudo go test -v -cover ./...

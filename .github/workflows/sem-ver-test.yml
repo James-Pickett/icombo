@@ -1,22 +1,25 @@
 name: sem-ver-test
 
 on:
-  push:
+  pull_request:
     branches:
-      - "auto-sem-ver"
+    - sem-ver-test
+    types:
+    - closed
 
 env:
   go-version: 1.17
 
 jobs:
   build_test_tag:
-    runs-on: ubuntu-18.04
+    if: github.event.pull_request.merged == 'true'
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
 
     - id: bump
       uses: zwaldowski/match-label-action@v2
       with:
-        allowed: "major, minor, patch"
+        allowed: major, minor, patch
 
     - run: echo ${{ steps.bump.outputs.match }}
