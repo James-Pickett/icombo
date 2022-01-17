@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
 
     - name: Set up Go
       uses: actions/setup-go@v2
@@ -26,7 +28,9 @@ jobs:
       run: sudo go test -v -cover ./...
     
     - name: Bump version and push tag
-      uses: hennejg/github-tag-action@v4.1.jh1
-      with:
-        release_branches: main
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        RELEASE_BRANCHES: main
+        
