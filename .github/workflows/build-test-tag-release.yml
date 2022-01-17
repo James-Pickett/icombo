@@ -27,10 +27,24 @@ jobs:
     - name: Test
       run: sudo go test -v -cover ./...
     
-    - name: Bump version and push tag
+    - id: bump
+      name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.36.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
         RELEASE_BRANCHES: main
         
+    - name: build and package
+      run: bash ./package_release.sh
+
+    - uses: "marvinpinto/action-automatic-releases@v1.2.1"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        title: ${{ steps.bump.outputs.new_tag }}
+        files: |
+          LICENSE
+          ./artifacts/*.zip
+          ./artifacts/*.tar.gz
+
