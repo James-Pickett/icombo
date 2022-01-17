@@ -47,14 +47,3 @@ jobs:
             LICENSE
             ./artifacts/*.zip
             ./artifacts/*.tar.gz
-
-      - uses: "marvinpinto/action-automatic-releases@v1.2.1"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          automatic_release_tag: latest
-          title: latest
-          files: |
-            LICENSE
-            ./artifacts/*.zip
-            ./artifacts/*.tar.gz
